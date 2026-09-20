@@ -5,15 +5,13 @@
     <div class="weekly-header">
       <div>
         <h2>Planeamento Semanal</h2>
-        <p class="weekly-subtitle">
-          Organização profissional do microciclo de treino
-        </p>
+        <p>Organização profissional do microciclo de treino</p>
       </div>
 
       <div class="weekly-actions">
-        <button onclick="fcPreviousWeek()">◀</button>
-        <button onclick="fcToday()">Hoje</button>
-        <button onclick="fcNextWeek()">▶</button>
+        <button type="button" onclick="fcPreviousWeek()">◀</button>
+        <button type="button" onclick="fcToday()">Hoje</button>
+        <button type="button" onclick="fcNextWeek()">▶</button>
       </div>
     </div>
 
@@ -26,36 +24,25 @@
 
       <div class="field">
         <label>Microciclo</label>
-        <input type="text" id="fc-microcycle"
-               placeholder="Ex.: Microciclo 4">
+        <input type="text" id="fc-microcycle" placeholder="Microciclo 1">
       </div>
 
       <div class="field">
         <label>Mesociclo</label>
-        <input type="text" id="fc-mesocycle"
-               placeholder="Ex.: Preparação">
+        <input type="text" id="fc-mesocycle" placeholder="Preparação">
       </div>
 
       <div class="field">
         <label>Fase da época</label>
-        <input type="text" id="fc-season-phase"
-               placeholder="Ex.: Competição">
+        <input type="text" id="fc-season-phase" placeholder="Competição">
       </div>
 
     </div>
 
     <div class="weekly-toolbar">
-      <button class="btn-primary" onclick="fcNewPlan()">
-        + Novo Planeamento
-      </button>
-
-      <button onclick="fcSavePlan()">
-        💾 Guardar
-      </button>
-
-      <button onclick="fcExportPlan()">
-        🖨️ Exportar
-      </button>
+      <button type="button" onclick="fcNewPlan()">+ Novo Planeamento</button>
+      <button type="button" onclick="fcSavePlan()">Guardar</button>
+      <button type="button" onclick="fcExportPlan()">Exportar</button>
     </div>
 
     <div class="weekly-objectives">
@@ -63,39 +50,30 @@
       <h3>Objetivos gerais da semana</h3>
 
       <textarea id="fc-week-objectives"
-        placeholder="Objetivos gerais do microciclo..."></textarea>
+        placeholder="Objetivos gerais do microciclo"></textarea>
 
       <div class="objective-grid">
-
-        <input id="fc-physical-objective"
-          placeholder="Objetivo físico">
-
-        <input id="fc-technical-objective"
-          placeholder="Objetivo técnico">
-
-        <input id="fc-tactical-objective"
-          placeholder="Objetivo tático">
-
-        <input id="fc-cognitive-objective"
-          placeholder="Objetivo cognitivo">
-
+        <input id="fc-physical-objective" placeholder="Objetivo físico">
+        <input id="fc-technical-objective" placeholder="Objetivo técnico">
+        <input id="fc-tactical-objective" placeholder="Objetivo tático">
+        <input id="fc-cognitive-objective" placeholder="Objetivo cognitivo">
       </div>
 
     </div>
 
-    <div class="fc-week-grid" id="fc-week-grid"></div>
+    <div id="fc-week-grid" class="fc-week-grid"></div>
 
     <div class="weekly-notes">
 
       <h3>Observações gerais</h3>
 
       <textarea id="fc-general-notes"
-        placeholder="Observações do treinador..."></textarea>
+        placeholder="Observações do treinador"></textarea>
 
       <h3>Notas privadas do treinador</h3>
 
       <textarea id="fc-private-notes"
-        placeholder="Estas notas não serão incluídas na exportação..."></textarea>
+        placeholder="Notas privadas não incluídas na exportação"></textarea>
 
     </div>
 
@@ -103,4 +81,4 @@
 
 </section>
 
-
+   
