@@ -1,153 +1,106 @@
-<!DOCTYPE html>
-<html lang="pt-PT">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FutCoach | Dossier Técnico</title>
-<style>
-:root{--bg:#f3f5f8;--panel:#fff;--ink:#172238;--muted:#718096;--line:#e3e8ef;--green:#22c997;--nav:#101b2d}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
-.app{display:flex;min-height:100vh}.sidebar{width:245px;background:var(--nav);color:#fff;padding:24px 14px;position:sticky;top:0;height:100vh;overflow:auto}
-.brand{font-size:25px;font-weight:800;color:var(--green);padding:10px 12px 30px}.brand small{display:block;font-size:11px;color:#9eacc2;letter-spacing:1px;margin-top:5px}
-.nav button{width:100%;text-align:left;border:0;background:transparent;color:#c3cee0;padding:13px 14px;border-radius:10px;margin:3px 0;font-size:14px;cursor:pointer}.nav button:hover,.nav button.active{background:#21324d;color:#fff}.nav button.active{border-left:4px solid var(--green)}
-.main{flex:1;padding:30px;max-width:1500px}.top{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:25px}.eyebrow{font-size:12px;color:#17a97f;letter-spacing:2px;font-weight:800}.title{font-size:34px;margin:8px 0}.sub{color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap}
-button,.btn{cursor:pointer}.btn{border:1px solid var(--line);background:#fff;padding:12px 16px;border-radius:9px;font-weight:700;color:var(--ink)}.btn.primary{background:var(--green);border-color:var(--green)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:22px;margin-bottom:20px;box-shadow:0 4px 16px #1722380a}.card h2{margin-top:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}.stat{padding:18px;border:1px solid var(--line);border-radius:12px;background:#fafbfd}.stat b{display:block;font-size:28px;margin-top:7px;color:#16a77d}.muted{color:var(--muted);font-size:13px}
-.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;background:#fff}.field textarea{min-height:100px;resize:vertical}
-table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:13px}th{background:#f7f9fb}.pill{display:inline-block;padding:5px 9px;border-radius:20px;background:#e6fbf3;color:#12916c;font-size:12px;font-weight:700}
-.section{display:none}.section.active{display:block}.menu-title{font-size:12px;color:#7d8da6;text-transform:uppercase;margin:20px 12px 7px;letter-spacing:1px}
-.exercise{border:1px solid var(--line);border-radius:12px;padding:16px}.exercise h3{margin:0 0 8px;font-size:16px;color:#159c76}
-@media(max-width:800px){.sidebar{width:70px;padding:12px 7px}.brand{font-size:0;text-align:center;padding:10px 0 25px}.brand:after{content:"FC";font-size:22px;color:var(--green)}.brand small{display:none}.nav button{font-size:0;text-align:center;padding:15px 2px}.nav button:first-letter{font-size:21px}.main{padding:18px 12px}.title{font-size:27px}}
-</style>
-</head>
-<body>
-<div class="app">
-<aside class="sidebar">
-<div class="brand">FutCoach<small>ESPERANÇA DE LAGOS</small></div>
-<nav class="nav">
-<div class="menu-title">Organização</div>
-<button class="active" data-section="dashboard">🏠 Visão geral</button>
-<button data-section="club">🏢 Clube</button>
-<button data-section="squad">👥 Plantel</button>
-<button data-section="players">🧍 Jogadores</button>
-<div class="menu-title">Planeamento</div>
-<button data-section="weekly">📅 Planeamento semanal</button>
-<button data-section="exercises">🏃 Exercícios</button>
-<button data-section="training">📝 Plano de treino</button>
-<button data-section="attendance">✅ Presenças</button>
-<div class="menu-title">Modelo de jogo</div>
-<button data-section="tactics">⚽ Tática e modelo de jogo</button>
-<button data-section="setpieces">🎯 Bolas paradas</button>
-<div class="menu-title">Competição</div>
-<button data-section="competitions">🏆 Competições</button>
-<button data-section="matches">🏟️ Jogos</button>
-<button data-section="callup">📋 Convocatórias</button>
-<button data-section="opponents">🔎 Adversários e scouting</button>
-<div class="menu-title">Análise</div>
-<button data-section="analysis">📊 Análise e reflexão</button>
-<button data-section="annual">📚 Registo anual</button>
-<button data-section="meetings">🤝 Reuniões</button>
-<button data-section="board">🧩 Quadro tático</button>
-<button data-section="statistics">📈 Estatísticas</button>
-</nav>
-</aside>
-<main class="main">
-<div class="top"><div><div class="eyebrow">FUTSAL • ÁREA TÉCNICA</div><div class="title" id="pageTitle">Visão geral</div><div class="sub">Dossier técnico digital — Esperança de Lagos</div></div><div class="actions"><button class="btn" onclick="window.print()">🖨️ Imprimir</button><button class="btn primary" onclick="newRecord()">＋ Novo registo</button></div></div>
+<section id="weekly" class="section">
 
-<section id="dashboard" class="section active">
-<div class="grid"><div class="stat">Plantel<b id="statPlayers">0</b><span class="muted">jogadores registados</span></div><div class="stat">Exercícios<b id="statExercises">0</b><span class="muted">exercícios criados</span></div><div class="stat">Jogos<b id="statMatches">0</b><span class="muted">jogos registados</span></div><div class="stat">Treinos<b id="statTrainings">0</b><span class="muted">planos de treino</span></div></div>
-<div class="card"><h2>Bem-vindo ao FutCoach</h2><p class="sub">Organiza a época, o plantel, os treinos, o modelo de jogo e a análise competitiva num só local.</p><div class="grid"><div class="exercise"><h3>Planeamento</h3><p>Semana, sessões, presenças e carga de trabalho.</p></div><div class="exercise"><h3>Metodologia</h3><p>Exercícios, princípios, objetivos físicos, técnicos, táticos e cognitivos.</p></div><div class="exercise"><h3>Competição</h3><p>Jogos, convocatórias, adversários, análise e estatísticas.</p></div></div></div>
+  <div class="card fut-weekly">
+
+    <div class="weekly-header">
+      <div>
+        <h2>Planeamento Semanal</h2>
+        <p class="weekly-subtitle">
+          Organização profissional do microciclo de treino
+        </p>
+      </div>
+
+      <div class="weekly-actions">
+        <button onclick="fcPreviousWeek()">◀</button>
+        <button onclick="fcToday()">Hoje</button>
+        <button onclick="fcNextWeek()">▶</button>
+      </div>
+    </div>
+
+    <div class="weekly-settings">
+
+      <div class="field">
+        <label>Semana</label>
+        <input type="date" id="fc-week-date">
+      </div>
+
+      <div class="field">
+        <label>Microciclo</label>
+        <input type="text" id="fc-microcycle"
+               placeholder="Ex.: Microciclo 4">
+      </div>
+
+      <div class="field">
+        <label>Mesociclo</label>
+        <input type="text" id="fc-mesocycle"
+               placeholder="Ex.: Preparação">
+      </div>
+
+      <div class="field">
+        <label>Fase da época</label>
+        <input type="text" id="fc-season-phase"
+               placeholder="Ex.: Competição">
+      </div>
+
+    </div>
+
+    <div class="weekly-toolbar">
+      <button class="btn-primary" onclick="fcNewPlan()">
+        + Novo Planeamento
+      </button>
+
+      <button onclick="fcSavePlan()">
+        💾 Guardar
+      </button>
+
+      <button onclick="fcExportPlan()">
+        🖨️ Exportar
+      </button>
+    </div>
+
+    <div class="weekly-objectives">
+
+      <h3>Objetivos gerais da semana</h3>
+
+      <textarea id="fc-week-objectives"
+        placeholder="Objetivos gerais do microciclo..."></textarea>
+
+      <div class="objective-grid">
+
+        <input id="fc-physical-objective"
+          placeholder="Objetivo físico">
+
+        <input id="fc-technical-objective"
+          placeholder="Objetivo técnico">
+
+        <input id="fc-tactical-objective"
+          placeholder="Objetivo tático">
+
+        <input id="fc-cognitive-objective"
+          placeholder="Objetivo cognitivo">
+
+      </div>
+
+    </div>
+
+    <div class="fc-week-grid" id="fc-week-grid"></div>
+
+    <div class="weekly-notes">
+
+      <h3>Observações gerais</h3>
+
+      <textarea id="fc-general-notes"
+        placeholder="Observações do treinador..."></textarea>
+
+      <h3>Notas privadas do treinador</h3>
+
+      <textarea id="fc-private-notes"
+        placeholder="Estas notas não serão incluídas na exportação..."></textarea>
+
+    </div>
+
+  </div>
+
 </section>
 
-<section id="club" class="section"><div class="card"><h2>Clube</h2><div class="formgrid"><div class="field"><label>Nome do clube</label><input value="Clube de Futebol Esperança de Lagos"></div><div class="field"><label>Modalidade</label><select><option>Futsal</option></select></div><div class="field"><label>Escalão</label><input value="Seniores Masculinos"></div><div class="field"><label>Época desportiva</label><input placeholder="2026/2027"></div><div class="field"><label>Treinador principal</label><input placeholder="Nome"></div><div class="field"><label>Pavilhão</label><input value="Pavilhão Municipal de Lagos"></div></div><br><button class="btn primary" onclick="saveMessage()">Guardar dados</button></div></section>
 
-<section id="squad" class="section"><div class="card"><h2>Plantel</h2><p class="sub">Gestão geral da equipa e equipa técnica.</p><div class="formgrid"><div class="field"><label>Nome da equipa</label><input value="Esperança de Lagos"></div><div class="field"><label>Capitão</label><input></div><div class="field"><label>Adjunto</label><input></div><div class="field"><label>Preparador físico</label><input></div><div class="field"><label>Treinador de guarda-redes</label><input></div><div class="field"><label>Delegado</label><input></div></div><br><button class="btn primary" onclick="saveMessage()">Guardar plantel</button></div></section>
-
-<section id="players" class="section"><div class="card"><h2>Jogadores</h2><div class="formgrid"><div class="field"><label>Nome</label><input id="pName"></div><div class="field"><label>Número</label><input id="pNumber" type="number"></div><div class="field"><label>Posição</label><select id="pPosition"><option>Guarda-redes</option><option>Fixo</option><option>Ala</option><option>Pivô</option></select></div><div class="field"><label>Observações</label><input id="pNotes"></div></div><br><button class="btn primary" onclick="addPlayer()">Adicionar jogador</button></div><div class="card"><table><thead><tr><th>N.º</th><th>Nome</th><th>Posição</th><th>Observações</th><th></th></tr></thead><tbody id="playersTable"></tbody></table></div></section>
-
-<section id="weekly" class="section"><div class="card"><h2>Planeamento semanal</h2><div class="formgrid"><div class="field"><label>Semana</label><input type="week"></div><div class="field"><label>Objetivo principal</label><input placeholder="Ex.: organização defensiva"></div><div class="field"><label>Jogo da semana</label><input></div></div><br><div class="grid"><div class="exercise"><h3>Treino 1</h3><p>Capacidade física integrada + técnica individual.</p></div><div class="exercise"><h3>Treino 2</h3><p>Organização tática + tomada de decisão.</p></div><div class="exercise"><h3>Treino 3</h3><p>Princípios coletivos + jogo condicionado.</p></div></div></div></section>
-
-<section id="exercises" class="section"><div class="card"><h2>Editor de exercícios</h2><div class="formgrid"><div class="field"><label>Nome do exercício</label><input id="eName"></div><div class="field"><label>Objetivo</label><input id="eGoal"></div><div class="field"><label>Componente</label><select id="eComponent"><option>Física</option><option>Técnica individual</option><option>Tática individual</option><option>Tática coletiva</option><option>Cognitiva</option><option>Integrada</option></select></div><div class="field"><label>Duração</label><input id="eTime" placeholder="Ex.: 12 minutos"></div></div><br><div class="field"><label>Descrição e organização</label><textarea id="eDescription"></textarea></div><br><button class="btn primary" onclick="addExercise()">Guardar exercício</button></div><div class="card"><table><thead><tr><th>Exercício</th><th>Objetivo</th><th>Componente</th><th>Duração</th></tr></thead><tbody id="exerciseTable"></tbody></table></div></section>
-
-<section id="training" class="section"><div class="card"><h2>Plano de treino</h2><div class="formgrid"><div class="field"><label>Data</label><input type="date"></div><div class="field"><label>Duração total</label><input placeholder="Ex.: 90 minutos"></div><div class="field"><label>Tema</label><input placeholder="Tema da sessão"></div><div class="field"><label>Objetivo</label><input></div></div><br><div class="field"><label>Estrutura da sessão</label><textarea placeholder="Aquecimento, parte principal, jogo condicionado, retorno à calma..."></textarea></div><br><button class="btn primary" onclick="saveMessage()">Guardar plano</button></div></section>
-
-<section id="attendance" class="section"><div class="card"><h2>Presenças</h2><p class="sub">Regista a presença, falta, atraso ou justificação de cada jogador.</p><div class="field"><label>Data do treino</label><input type="date"></div><br><div id="attendanceList"></div><button class="btn primary" onclick="saveMessage()">Guardar presenças</button></div></section>
-
-<section id="tactics" class="section"><div class="card"><h2>Tática e modelo de jogo</h2><div class="grid"><div class="exercise"><h3>Organização ofensiva</h3><textarea placeholder="Princípios, sistemas, comportamentos..."></textarea></div><div class="exercise"><h3>Organização defensiva</h3><textarea placeholder="Pressão, bloco, coberturas..."></textarea></div><div class="exercise"><h3>Transição ofensiva</h3><textarea placeholder="Reação à recuperação..."></textarea></div><div class="exercise"><h3>Transição defensiva</h3><textarea placeholder="Reação à perda..."></textarea></div></div><br><button class="btn primary" onclick="saveMessage()">Guardar modelo de jogo</button></div></section>
-
-<section id="setpieces" class="section"><div class="card"><h2>Bolas paradas</h2><div class="grid"><div class="exercise"><h3>Livres diretos</h3><textarea></textarea></div><div class="exercise"><h3>Livres indiretos</h3><textarea></textarea></div><div class="exercise"><h3>Cantos ofensivos</h3><textarea></textarea></div><div class="exercise"><h3>Reposições laterais</h3><textarea></textarea></div><div class="exercise"><h3>Defesa de bolas paradas</h3><textarea></textarea></div></div><br><button class="btn primary" onclick="saveMessage()">Guardar bolas paradas</button></div></section>
-
-<section id="competitions" class="section"><div class="card"><h2>Competições</h2><div class="formgrid"><div class="field"><label>Competição</label><input placeholder="Ex.: Campeonato Distrital"></div><div class="field"><label>Época</label><input></div><div class="field"><label>Objetivo</label><input></div><div class="field"><label>Observações</label><input></div></div><br><button class="btn primary" onclick="saveMessage()">Guardar competição</button></div></section>
-
-<section id="matches" class="section"><div class="card"><h2>Jogos</h2><div class="formgrid"><div class="field"><label>Data</label><input type="date"></div><div class="field"><label>Adversário</label><input></div><div class="field"><label>Casa/Fora</label><select><option>Casa</option><option>Fora</option></select></div><div class="field"><label>Resultado</label><input placeholder="Ex.: 5-2"></div></div><br><button class="btn primary" onclick="addMatch()">Registar jogo</button></div><div class="card"><table><thead><tr><th>Data</th><th>Adversário</th><th>Local</th><th>Resultado</th></tr></thead><tbody id="matchTable"></tbody></table></div></section>
-
-<section id="callup" class="section"><div class="card"><h2>Convocatórias</h2><div class="field"><label>Jogo</label><input placeholder="Adversário e data"></div><br><p class="sub">Seleciona os jogadores convocados.</p><div id="callupList"></div><br><button class="btn primary" onclick="saveMessage()">Guardar convocatória</button></div></section>
-
-<section id="opponents" class="section"><div class="card"><h2>Adversários e scouting</h2><div class="formgrid"><div class="field"><label>Adversário</label><input></div><div class="field"><label>Data de observação</label><input type="date"></div><div class="field"><label>Sistema utilizado</label><input></div><div class="field"><label>Pontos fortes</label><textarea></textarea></div><div class="field"><label>Pontos fracos</label><textarea></textarea></div><div class="field"><label>Plano estratégico</label><textarea></textarea></div></div><br><button class="btn primary" onclick="saveMessage()">Guardar scouting</button></div></section>
-
-<section id="analysis" class="section"><div class="card"><h2>Análise e reflexão de jogo</h2><div class="formgrid"><div class="field"><label>Jogo analisado</label><input></div><div class="field"><label>Resultado</label><input></div><div class="field"><label>O que correu bem</label><textarea></textarea></div><div class="field"><label>O que melhorar</label><textarea></textarea></div><div class="field"><label>Decisões para o próximo jogo</label><textarea></textarea></div></div><br><button class="btn primary" onclick="saveMessage()">Guardar análise</button></div></section>
-
-<section id="annual" class="section"><div class="card"><h2>Registo anual</h2><div class="field"><label>Notas da época</label><textarea placeholder="Evolução da equipa, objetivos, momentos importantes..."></textarea></div><br><button class="btn primary" onclick="saveMessage()">Guardar registo</button></div></section>
-
-<section id="meetings" class="section"><div class="card"><h2>Reuniões</h2><div class="formgrid"><div class="field"><label>Data</label><input type="date"></div><div class="field"><label>Participantes</label><input></div><div class="field"><label>Assunto</label><input></div></div><br><div class="field"><label>Resumo e decisões</label><textarea></textarea></div><br><button class="btn primary" onclick="saveMessage()">Guardar reunião</button></div></section>
-
-
-<section id="board" class="section">
-<div class="card">
-<h2>Quadro tático de futsal</h2>
-<p class="sub">Cria movimentos, posicionamentos e exercícios táticos. Os elementos podem ser arrastados e o quadro pode ser exportado.</p>
-<div class="formgrid">
-<div class="field"><label>Modelo</label><select id="boardFormation"><option value="31">3-1</option><option value="40">4-0</option><option value="22">2-2</option><option value="power">Guarda-redes avançado</option></select></div>
-<div class="field"><label>Nome da situação</label><input id="boardName" placeholder="Ex.: saída de pressão"></div>
-</div><br>
-<canvas id="boardCanvas" width="900" height="560" style="width:100%;background:#176345;border-radius:12px;touch-action:none"></canvas>
-<div class="actions" style="margin-top:12px">
-<button class="btn" onclick="boardTool='move'">✋ Mover</button>
-<button class="btn" onclick="boardTool='arrow'">↗ Seta</button>
-<button class="btn" onclick="resetBoard()">↻ Repor</button>
-<button class="btn" onclick="clearBoardArrows()">🧹 Limpar setas</button>
-<button class="btn primary" onclick="exportBoard()">📸 Exportar</button>
-</div>
-</div>
-</section>
-
-<section id="statistics" class="section"><div class="card"><h2>Estatísticas</h2><div class="grid"><div class="stat">Jogadores registados<b id="statsPlayers">0</b></div><div class="stat">Exercícios<b id="statsExercises">0</b></div><div class="stat">Jogos<b id="statsMatches">0</b></div></div><p class="sub">Nesta primeira versão, os indicadores são atualizados a partir dos registos inseridos nesta página.</p></div></section>
-
-</main></div>
-<script>
-const data={players:JSON.parse(localStorage.getItem('fc_players')||'[]'),exercises:JSON.parse(localStorage.getItem('fc_exercises')||'[]'),matches:JSON.parse(localStorage.getItem('fc_matches')||'[]')};
-const titles={dashboard:'Visão geral',club:'Clube',squad:'Plantel',players:'Jogadores',weekly:'Planeamento semanal',exercises:'Exercícios',training:'Plano de treino',attendance:'Presenças',tactics:'Tática e modelo de jogo',setpieces:'Bolas paradas',competitions:'Competições',matches:'Jogos',callup:'Convocatórias',opponents:'Adversários e scouting',analysis:'Análise e reflexão',annual:'Registo anual',meetings:'Reuniões',statistics:'Estatísticas'};
-document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.section)));
-function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.section===id));document.getElementById('pageTitle').textContent=titles[id]||id;renderAll();}
-function save(){localStorage.setItem('fc_players',JSON.stringify(data.players));localStorage.setItem('fc_exercises',JSON.stringify(data.exercises));localStorage.setItem('fc_matches',JSON.stringify(data.matches));renderAll();}
-function saveMessage(){save();alert('Dados guardados neste dispositivo.');}
-function addPlayer(){let name=document.getElementById('pName').value.trim();if(!name)return alert('Introduz o nome do jogador.');data.players.push({name,number:document.getElementById('pNumber').value,position:document.getElementById('pPosition').value,notes:document.getElementById('pNotes').value});save();['pName','pNumber','pNotes'].forEach(id=>document.getElementById(id).value='');}
-function deletePlayer(i){data.players.splice(i,1);save();}
-function addExercise(){let name=document.getElementById('eName').value.trim();if(!name)return alert('Introduz o nome do exercício.');data.exercises.push({name,goal:document.getElementById('eGoal').value,component:document.getElementById('eComponent').value,time:document.getElementById('eTime').value,description:document.getElementById('eDescription').value});save();}
-function addMatch(){let inputs=document.querySelectorAll('#matches input');data.matches.push({date:inputs[0].value,opponent:inputs[1].value,location:document.querySelector('#matches select').value,result:inputs[2].value});save();}
-function newRecord(){alert('Escolhe uma área no menu lateral para criar um novo registo.');}
-function renderAll(){
-document.getElementById('statPlayers').textContent=data.players.length;document.getElementById('statExercises').textContent=data.exercises.length;document.getElementById('statMatches').textContent=data.matches.length;document.getElementById('statTrainings').textContent='—';document.getElementById('statsPlayers').textContent=data.players.length;document.getElementById('statsExercises').textContent=data.exercises.length;document.getElementById('statsMatches').textContent=data.matches.length;
-document.getElementById('playersTable').innerHTML=data.players.map((p,i)=>`<tr><td>${p.number||'—'}</td><td>${p.name}</td><td><span class="pill">${p.position}</span></td><td>${p.notes||''}</td><td><button class="btn" onclick="deletePlayer(${i})">Apagar</button></td></tr>`).join('')||'<tr><td colspan="5" class="muted">Ainda não existem jogadores.</td></tr>';
-document.getElementById('exerciseTable').innerHTML=data.exercises.map(e=>`<tr><td>${e.name}</td><td>${e.goal||''}</td><td>${e.component}</td><td>${e.time||''}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">Ainda não existem exercícios.</td></tr>';
-document.getElementById('matchTable').innerHTML=data.matches.map(m=>`<tr><td>${m.date||''}</td><td>${m.opponent||''}</td><td>${m.location||''}</td><td>${m.result||''}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">Ainda não existem jogos.</td></tr>';
-document.getElementById('attendanceList').innerHTML=data.players.map(p=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)"><b>${p.name}</b> <select style="float:right"><option>Presente</option><option>Falta</option><option>Atraso</option><option>Justificada</option></select></div>`).join('')||'<p class="muted">Adiciona jogadores no menu Plantel.</p>';
-document.getElementById('callupList').innerHTML=data.players.map(p=>`<label style="display:block;padding:8px 0"><input type="checkbox"> ${p.number||''} — ${p.name} (${p.position})</label>`).join('')||'<p class="muted">Adiciona jogadores no menu Plantel.</p>';
-}
-renderAll();
-
-let boardTool='move', boardPlayers=[], boardArrows=[], boardDrag=null, boardStart=null;
-const bc=document.getElementById('boardCanvas'), bx=bc.getContext('2d');
-function resetBoard(){const f=document.getElementById('boardFormation').value;const sets={31:[[100,280,'GR'],[330,150,'1'],[330,410,'2'],[480,280,'3'],[730,280,'4']],40:[[100,280,'GR'],[320,130,'1'],[470,410,'2'],[470,130,'3'],[730,280,'4']],22:[[100,280,'GR'],[330,150,'1'],[330,410,'2'],[680,150,'3'],[680,410,'4']],power:[[100,280,'GR'],[350,160,'1'],[350,400,'2'],[610,160,'3'],[610,400,'GR']]};boardPlayers=sets[f].map((p,i)=>({x:p[0],y:p[1],label:p[2],id:i}));boardArrows=[];drawBoard()}
-function drawBoard(){bx.clearRect(0,0,900,560);bx.fillStyle='#176345';bx.fillRect(0,0,900,560);bx.strokeStyle='white';bx.lineWidth=4;bx.strokeRect(20,20,860,520);bx.beginPath();bx.moveTo(450,20);bx.lineTo(450,540);bx.stroke();bx.beginPath();bx.arc(450,280,90,0,Math.PI*2);bx.stroke();bx.strokeRect(20,180,150,200);bx.strokeRect(730,180,150,200);boardArrows.forEach(a=>{bx.strokeStyle='#ffd34e';bx.lineWidth=7;bx.beginPath();bx.moveTo(a.x1,a.y1);bx.lineTo(a.x2,a.y2);bx.stroke();let ang=Math.atan2(a.y2-a.y1,a.x2-a.x1);bx.fillStyle='#ffd34e';bx.beginPath();bx.moveTo(a.x2,a.y2);bx.lineTo(a.x2-22*Math.cos(ang-.5),a.y2-22*Math.sin(ang-.5));bx.lineTo(a.x2-22*Math.cos(ang+.5),a.y2-22*Math.sin(ang+.5));bx.fill()});boardPlayers.forEach(p=>{bx.beginPath();bx.fillStyle=p.label==='GR'?'#f5bd54':'#55a5ff';bx.arc(p.x,p.y,35,0,Math.PI*2);bx.fill();bx.strokeStyle='white';bx.lineWidth=3;bx.stroke();bx.fillStyle='#102033';bx.font='bold 22px Arial';bx.textAlign='center';bx.textBaseline='middle';bx.fillText(p.label,p.x,p.y)})}
-function boardPos(e){let r=bc.getBoundingClientRect();return{x:(e.clientX-r.left)*900/r.width,y:(e.clientY-r.top)*560/r.height}}
-bc.addEventListener('pointerdown',e=>{let p=boardPos(e);if(boardTool==='move'){boardDrag=boardPlayers.find(x=>Math.hypot(x.x-p.x,x.y-p.y)<40)}else boardStart=p;bc.setPointerCapture(e.pointerId)});
-bc.addEventListener('pointermove',e=>{if(!boardDrag)return;let p=boardPos(e);boardDrag.x=Math.max(40,Math.min(860,p.x));boardDrag.y=Math.max(40,Math.min(520,p.y));drawBoard()});
-bc.addEventListener('pointerup',e=>{let p=boardPos(e);if(boardTool==='arrow'&&boardStart&&Math.hypot(p.x-boardStart.x,p.y-boardStart.y)>20)boardArrows.push({x1:boardStart.x,y1:boardStart.y,x2:p.x,y2:p.y});boardDrag=null;boardStart=null;drawBoard()});
-function clearBoardArrows(){boardArrows=[];drawBoard()}
-function exportBoard(){let a=document.createElement('a');a.download=(document.getElementById('boardName').value||'quadro-tatico')+'.png';a.href=bc.toDataURL();a.click()}
-document.getElementById('boardFormation').addEventListener('change',resetBoard);resetBoard();
-
-</script>
-</body>
-</html>
