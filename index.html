@@ -1,111 +1,141 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FutCoach</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f4f7;
-            margin: 0;
-            padding: 0;
-            color: #222;
-        }
-
-        header {
-            background: #0b3d91;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-
-        header p {
-            font-size: 16px;
-        }
-
-        main {
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px #00000015;
-        }
-
-        h2 {
-            color: #0b3d91;
-        }
-
-        button {
-            background: #0b3d91;
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FutCoach | Dossier do Treinador</title>
+<style>
+:root{--bg:#0b1120;--panel:#121b2e;--panel2:#18243b;--line:#2b3a55;--text:#eef4ff;--muted:#9aaac4;--accent:#43e6a2;--accent2:#55a7ff;--danger:#ff6b7a}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#080d18,#111d31);color:var(--text)}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#09101d;border-right:1px solid var(--line);padding:22px 14px;position:fixed;inset:0 auto 0 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;margin:4px 10px 30px}.logo span{color:var(--accent)}
+.logo-icon{width:38px;height:38px;border:2px solid var(--accent);border-radius:12px;display:grid;place-items:center}
+.nav button{width:100%;padding:13px 14px;margin:4px 0;text-align:left;border-radius:10px;background:transparent;color:var(--muted);font-weight:700}
+.nav button.active,.nav button:hover{background:var(--panel2);color:var(--accent)}
+.main{margin-left:245px;width:calc(100% - 245px);padding:25px;max-width:1600px}
+.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:25px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.top h1{margin:7px 0;font-size:30px}.sub{color:var(--muted);margin:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{padding:11px 15px;border-radius:9px;background:var(--panel2);color:var(--text);border:1px solid var(--line);font-weight:800}.btn.primary{background:var(--accent);color:#07141a;border-color:var(--accent)}.btn:hover{filter:brightness(1.1)}
+.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:rgba(18,27,46,.92);border:1px solid var(--line);border-radius:15px;padding:19px;box-shadow:0 10px 30px #0002}.stat-label{color:var(--muted);font-size:13px;font-weight:700}.stat{font-size:32px;font-weight:900;margin:10px 0}.tag{display:inline-block;font-size:11px;padding:5px 8px;border-radius:20px;background:#173b36;color:var(--accent);font-weight:800}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:26px 0 13px}.section-title h2{font-size:19px;margin:0}.muted{color:var(--muted)}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:15px}.list{display:grid;gap:10px}.list-item{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#0e1728;border:1px solid #20304a;border-radius:10px}.list-item strong{display:block}.list-item small{color:var(--muted)}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);white-space:nowrap}.table th{color:var(--muted);font-size:12px;text-transform:uppercase}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field label{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:11px;background:#0a1322;border:1px solid var(--line);border-radius:8px;color:var(--text)}.field textarea{min-height:100px;resize:vertical}.full{grid-column:1/-1}
+.board-area{display:grid;grid-template-columns:1fr 230px;gap:15px}.pitch{position:relative;aspect-ratio:1.55;background:#176044;border:5px solid #d6f3dd;border-radius:8px;overflow:hidden;background-image:linear-gradient(90deg,transparent 49.7%,#d6f3dd 50%,transparent 50.3%),linear-gradient(#ffffff14 1px,transparent 1px);background-size:100% 100%,100% 10%;box-shadow:inset 0 0 0 999px #0a3b2730}.pitch:before{content:"";position:absolute;inset:7%;border:2px solid #d6f3dd55;border-radius:50%}.pitch:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid #d6f3dd}.player{position:absolute;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent2);color:#07141a;font-weight:900;border:3px solid white;transform:translate(-50%,-50%);user-select:none;touch-action:none}.player.opponent{background:var(--danger)}.board-tools{display:grid;gap:9px;align-content:start}.board-tools button{padding:10px;border-radius:8px;background:var(--panel2);color:var(--text);text-align:left}.board-tools button:hover{background:#263752}
+.notice{padding:12px 14px;background:#182c2a;border:1px solid #28574c;color:#b8ffe0;border-radius:10px;margin-top:15px;font-size:13px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.two,.board-area{grid-template-columns:1fr}.sidebar{width:76px;padding:15px 8px}.logo{font-size:0;justify-content:center;margin:5px 0 25px}.nav button{font-size:0;text-align:center}.nav button:first-letter{font-size:20px}.main{margin-left:76px;width:calc(100% - 76px);padding:18px}.top{align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.grid,.form-grid{grid-template-columns:1fr}.top h1{font-size:24px}.main{padding:13px}.card{padding:14px}}
+</style>
 </head>
-
 <body>
+<div class="app">
+<aside class="sidebar">
+<div class="logo"><div class="logo-icon">â½</div><div>Fut<span>Coach</span></div></div>
+<nav class="nav">
+<button class="active" data-page="dashboard">ð  <span>Dashboard</span></button>
+<button data-page="treinos">ð <span>Treinos</span></button>
+<button data-page="tatico">ð§  <span>Tactical Board</span></button>
+<button data-page="plantel">ð¥ <span>Plantel</span></button>
+<button data-page="calendario">ð <span>CalendÃ¡rio</span></button>
+<button data-page="notas">ð <span>Notas</span></button>
+</nav>
+</aside>
+<main class="main">
+<header class="top">
+<div><div class="eyebrow">Futsal â¢ Ãrea tÃ©cnica</div><h1 id="pageTitle">Dashboard da equipa</h1><p class="sub">EsperanÃ§a de Lagos Â· OrganizaÃ§Ã£o profissional</p></div>
+<div class="actions"><button class="btn" onclick="exportData()">â¬ Exportar</button><button class="btn primary" onclick="showPage('treinos')">+ Novo treino</button></div>
+</header>
 
-    <header>
-        <h1>⚽ FutCoach</h1>
-        <p>A tua ferramenta para planear treinos de futsal</p>
-    </header>
+<section id="dashboard" class="page active">
+<div class="grid">
+<div class="card"><div class="stat-label">Jogadores</div><div class="stat" id="statPlayers">0</div><span class="tag">Plantel</span></div>
+<div class="card"><div class="stat-label">Treinos registados</div><div class="stat" id="statTrainings">0</div><span class="tag">Planeamento</span></div>
+<div class="card"><div class="stat-label">Jogos agendados</div><div class="stat" id="statGames">0</div><span class="tag">CalendÃ¡rio</span></div>
+<div class="card"><div class="stat-label">Identidade</div><div class="stat">100%</div><span class="tag">Classe</span></div>
+</div>
+<div class="two">
+<div class="card">
+<div class="section-title"><h2>PrÃ³ximos compromissos</h2><button class="btn" onclick="showPage('calendario')">Ver tudo</button></div>
+<div id="upcoming" class="list"><p class="muted">Ainda nÃ£o existem compromissos.</p></div>
+</div>
+<div class="card">
+<div class="section-title"><h2>PrincÃ­pios do treinador</h2></div>
+<div class="list">
+<div class="list-item"><div><strong>Intensidade</strong><small>Treinar com intenÃ§Ã£o e concentraÃ§Ã£o.</small></div>â¡</div>
+<div class="list-item"><div><strong>ComunicaÃ§Ã£o</strong><small>Todos ligados ao processo.</small></div>ð£ï¸</div>
+<div class="list-item"><div><strong>Responsabilidade</strong><small>Compromisso individual e coletivo.</small></div>ð¯</div>
+</div></div>
+</div>
+</section>
 
-    <main>
+<section id="treinos" class="page">
+<div class="card">
+<div class="section-title"><h2>Registar novo treino</h2><span class="tag">Integrado</span></div>
+<form id="trainingForm" class="form-grid">
+<div class="field"><label>Data</label><input id="tDate" type="date" required></div>
+<div class="field"><label>Tipo de sessÃ£o</label><select id="tType"><option>Treino integrado</option><option>RecuperaÃ§Ã£o</option><option>ForÃ§a e capacidade fÃ­sica</option><option>TÃ©cnica individual</option><option>TÃ¡tica coletiva</option><option>Bolas paradas</option></select></div>
+<div class="field"><label>DuraÃ§Ã£o (minutos)</label><input id="tDuration" type="number" value="90" min="1"></div>
+<div class="field"><label>Objetivo principal</label><input id="tObjective" placeholder="Ex.: TransiÃ§Ã£o defensiva" required></div>
+<div class="field full"><label>ConteÃºdo / exercÃ­cios</label><textarea id="tContent" placeholder="Aquecimento, componente fÃ­sica, tÃ©cnica, tÃ¡tica e cognitiva..."></textarea></div>
+<div class="field full"><button class="btn primary" type="submit">Guardar treino</button></div>
+</form>
+</div>
+<div class="section-title"><h2>HistÃ³rico de treinos</h2></div>
+<div class="card table-wrap"><table class="table"><thead><tr><th>Data</th><th>Tipo</th><th>Objetivo</th><th>DuraÃ§Ã£o</th><th></th></tr></thead><tbody id="trainingRows"></tbody></table></div>
+</section>
 
-        <div class="card">
-            <h2>📅 Planeamento de Treinos</h2>
-            <p>Organiza os teus treinos de forma simples e profissional.</p>
-            <button onclick="alert('Brevemente disponível!')">
-                Criar Treino
-            </button>
-        </div>
+<section id="tatico" class="page">
+<div class="card"><div class="section-title"><h2>Tactical Board</h2><div class="actions"><button class="btn" onclick="clearBoard()">Limpar</button><button class="btn primary" onclick="addPlayer()">+ Jogador</button></div></div>
+<div class="board-area"><div id="pitch" class="pitch"></div><div class="board-tools"><button onclick="setPlayerType('home')">ðµ Jogador da equipa</button><button onclick="setPlayerType('opponent')">ð´ AdversÃ¡rio</button><button onclick="addBall()">â½ Adicionar bola</button><button onclick="resetBoard()">âº FormaÃ§Ã£o inicial</button><p class="muted">Arraste os jogadores no campo. Use o quadro para explicar movimentos e posicionamentos.</p></div></div>
+<div class="notice">SugestÃ£o: use o quadro para trabalhar saÃ­da de pressÃ£o, 3-1, 4-0, superioridades, transiÃ§Ãµes e bolas paradas.</div>
+</div>
+</section>
 
-        <div class="card">
-            <h2>🏋️ Capacidade Física</h2>
-            <p>Planeia exercícios físicos integrados com bola.</p>
-            <button onclick="alert('Brevemente disponível!')">
-                Ver Exercícios
-            </button>
-        </div>
+<section id="plantel" class="page">
+<div class="card"><div class="section-title"><h2>Adicionar jogador</h2></div>
+<form id="playerForm" class="form-grid"><div class="field"><label>Nome</label><input id="pName" required placeholder="Nome do jogador"></div><div class="field"><label>PosiÃ§Ã£o</label><select id="pPosition"><option>Guarda-redes</option><option>Fixo</option><option>Ala</option><option>PivÃ´</option></select></div><div class="field"><label>NÃºmero</label><input id="pNumber" type="number" min="0" max="99"></div><div class="field"><label>ObservaÃ§Ãµes</label><input id="pNotes" placeholder="PÃ© dominante, caracterÃ­sticas..."></div><div class="field full"><button class="btn primary">Adicionar ao plantel</button></div></form></div>
+<div class="section-title"><h2>Plantel</h2></div><div class="card table-wrap"><table class="table"><thead><tr><th>#</th><th>Nome</th><th>PosiÃ§Ã£o</th><th>ObservaÃ§Ãµes</th><th></th></tr></thead><tbody id="playerRows"></tbody></table></div>
+</section>
 
-        <div class="card">
-            <h2>🧠 Componente Cognitiva</h2>
-            <p>Desenvolve a tomada de decisão dos atletas.</p>
-            <button onclick="alert('Brevemente disponível!')">
-                Explorar
-            </button>
-        </div>
+<section id="calendario" class="page">
+<div class="card"><div class="section-title"><h2>Adicionar compromisso</h2></div>
+<form id="gameForm" class="form-grid"><div class="field"><label>Data</label><input id="gDate" type="date" required></div><div class="field"><label>Hora</label><input id="gTime" type="time" value="21:30"></div><div class="field"><label>Tipo</label><select id="gType"><option>Jogo</option><option>Treino</option><option>ReuniÃ£o</option><option>Outro</option></select></div><div class="field"><label>AdversÃ¡rio / descriÃ§Ã£o</label><input id="gTitle" required placeholder="Ex.: Jogo vs. ..."></div><div class="field full"><button class="btn primary">Guardar compromisso</button></div></form></div>
+<div class="section-title"><h2>CalendÃ¡rio</h2></div><div class="card table-wrap"><table class="table"><thead><tr><th>Data</th><th>Hora</th><th>Tipo</th><th>DescriÃ§Ã£o</th><th></th></tr></thead><tbody id="gameRows"></tbody></table></div>
+</section>
 
-    </main>
-
-    <footer>
-        FutCoach © 2026
-    </footer>
-
+<section id="notas" class="page">
+<div class="card"><div class="section-title"><h2>Bloco de notas tÃ©cnico</h2><button class="btn primary" onclick="saveNotes()">Guardar</button></div><textarea id="notesBox" style="width:100%;min-height:360px;background:#0a1322;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:15px" placeholder="Ideias de treino, anÃ¡lise do adversÃ¡rio, objetivos da equipa..."></textarea><p class="muted">As informaÃ§Ãµes ficam guardadas neste dispositivo atravÃ©s do armazenamento local do navegador.</p></div>
+</section>
+</main></div>
+<script>
+const state=JSON.parse(localStorage.getItem('futcoachData')||'{"trainings":[],"players":[],"games":[],"notes":""}');
+let playerType='home',playerCounter=0;
+const $=id=>document.getElementById(id);
+function persist(){localStorage.setItem('futcoachData',JSON.stringify(state));renderAll()}
+function showPage(page){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(page).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===page));const titles={dashboard:'Dashboard da equipa',treinos:'Planeamento de treinos',tatico:'Quadro tÃ¡tico',plantel:'GestÃ£o de plantel',calendario:'CalendÃ¡rio da equipa',notas:'Notas tÃ©cnicas'};$('pageTitle').textContent=titles[page]}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function removeItem(type,i){if(confirm('Eliminar este registo?')){state[type].splice(i,1);persist()}}
+$('trainingForm').addEventListener('submit',e=>{e.preventDefault();state.trainings.push({date:$('tDate').value,type:$('tType').value,duration:$('tDuration').value,objective:$('tObjective').value,content:$('tContent').value});e.target.reset();$('tDuration').value=90;persist()});
+$('playerForm').addEventListener('submit',e=>{e.preventDefault();state.players.push({name:$('pName').value,position:$('pPosition').value,number:$('pNumber').value,notes:$('pNotes').value});e.target.reset();persist()});
+$('gameForm').addEventListener('submit',e=>{e.preventDefault();state.games.push({date:$('gDate').value,time:$('gTime').value,type:$('gType').value,title:$('gTitle').value});e.target.reset();persist()});
+function renderAll(){
+$('statPlayers').textContent=state.players.length;$('statTrainings').textContent=state.trainings.length;$('statGames').textContent=state.games.length;
+$('trainingRows').innerHTML=state.trainings.slice().sort((a,b)=>b.date.localeCompare(a.date)).map((x,i)=>`<tr><td>${esc(x.date)}</td><td>${esc(x.type)}</td><td>${esc(x.objective)}</td><td>${esc(x.duration)} min</td><td><button class="btn" onclick="removeItem('trainings',${state.trainings.indexOf(x)})">â</button></td></tr>`).join('')||'<tr><td colspan="5" class="muted">Sem treinos registados.</td></tr>';
+$('playerRows').innerHTML=state.players.map((x,i)=>`<tr><td>${esc(x.number)}</td><td><strong>${esc(x.name)}</strong></td><td>${esc(x.position)}</td><td>${esc(x.notes)}</td><td><button class="btn" onclick="removeItem('players',${i})">â</button></td></tr>`).join('')||'<tr><td colspan="5" class="muted">Sem jogadores registados.</td></tr>';
+$('gameRows').innerHTML=state.games.slice().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.time)}</td><td>${esc(x.type)}</td><td>${esc(x.title)}</td><td><button class="btn" onclick="removeItem('games',${state.games.indexOf(x)})">â</button></td></tr>`).join('')||'<tr><td colspan="5" class="muted">Sem compromissos registados.</td></tr>';
+const upcoming=state.games.slice().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,5);
+$('upcoming').innerHTML=upcoming.map(x=>`<div class="list-item"><div><strong>${esc(x.title)}</strong><small>${esc(x.date)} Â· ${esc(x.time)} Â· ${esc(x.type)}</small></div>ð</div>`).join('')||'<p class="muted">Ainda nÃ£o existem compromissos.</p>';
+$('notesBox').value=state.notes||''
+}
+function saveNotes(){state.notes=$('notesBox').value;persist();alert('Notas guardadas.')}
+function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='futcoach-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function setPlayerType(type){playerType=type}
+function addPlayer(x=.5,y=.5,label=''){const p=document.createElement('div');p.className='player '+(playerType==='opponent'?'opponent':'');p.textContent=label||($('.player', $('pitch'))?.length+1||1);p.style.left=(x*100)+'%';p.style.top=(y*100)+'%';p.draggable=true;p.addEventListener('dragend',e=>{const r=$('pitch').getBoundingClientRect();p.style.left=((e.clientX-r.left)/r.width*100)+'%';p.style.top=((e.clientY-r.top)/r.height*100)+'%'});$('pitch').appendChild(p)}
+function addBall(){const b=document.createElement('div');b.className='player';b.style.background='#fff';b.textContent='â½';b.style.left='50%';b.style.top='50%';$('pitch').appendChild(b)}
+function clearBoard(){$('pitch').innerHTML=''}
+function resetBoard(){clearBoard();[['GR',.08,.5],['1',.28,.25],['2',.28,.75],['3',.48,.35],['4',.48,.65],['P',.75,.5]].forEach(a=>addPlayer(a[1],a[2],a[0]))}
+renderAll();resetBoard();
+</script>
 </body>
 </html>
